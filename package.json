@@ -1,0 +1,23 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "FirstExpressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "alizafar",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "jquery": "^1.9.1",
+    "popper.js": "^1.12.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
