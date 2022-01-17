@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{!-- <link rel="stylesheet" href="style.css"> --}}
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        body
+{
+    background-color: blanchedalmond;
+}
+
+#tab_grid
+{
+    width: 402px;
+    height: 402px;
+    border: 5px solid #999;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 1px;
+    margin: auto;
+    margin-top: 20px;
+    background-color: #999;
+}
+
+.clicks
+{
+    height: 133px;
+    width: 133px;
+    /* font-size: 0.1px; */
+    /* color: black; */
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    font-style: italic;
+    /* border: 1px solid; */
+
+}
+
+#start
+{
+    width: 170px;
+    margin: auto;
+    margin-top: 20px;
+    border: 2px solid #999;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    /* padding-top: 10px; */
+    color: black;
+    background-color: #999;
+    font-size: 25px;
+    padding-bottom: 36px;
+}
+
+#start:hover
+{
+    color: rgb(61, 59, 59);
+}
+
+/* 
+#p0
+{
+    display: none;
+} */
+
+.container { 
+    height: 100px;
+    position: relative;
+    /* border: 3px solid green;  */
+    padding-top: 0px;
+  }
+  
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  #timer
+  {
+      font-size: 20px;
+      text-align: center;
+      display: block;
+      margin: 0px;
+      padding: 0px;
+  }
+  /* #seconds
+  {
+      font-size: 50px;
+      text-align: right;
+  } */
+
+  #name
+  {
+      font-size: 40px;
+      text-align: center;
+      display: block;
+      margin: 0px;
+      padding: 0px;
+  }
+
+
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+  }
+  
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+  }
+  
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
+  }
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+      width: 100%;
+    }
+  }
+    </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrapper" style="background-color: white;">
+    <div id="result"></div>
+
+      <h1 id="name">Puzzle</h1>
+      <div id="timer">
+        <span id="minutes"></span>:<span id="seconds"></span>
+      </div>
+    <div id="tab_grid">
+      <div class="clicks" id="p0" onclick="swap('0');">0</div>
+      <div class="clicks" id="p1" onclick="swap('1');">1</div>
+      <div class="clicks" id="p2" onclick="swap('2');">2</div>
+      <div class="clicks" id="p3" onclick="swap('3');">3</div>
+      <div class="clicks" id="p4" onclick="swap('4');">4</div>
+      <div class="clicks" id="p5" onclick="swap('5');">5</div>
+      <div class="clicks" id="p6" onclick="swap('6');">6</div>
+      <div class="clicks" id="p7" onclick="swap('7');">7</div>
+      <div class="clicks" id="p8" onclick="swap('8');">8</div>
+    </div>
+
+    <div class="container">
+      <div class="center">
+        <button onclick="lesgo(); timer()" id="start">Start</button> 
+        {{!-- <button onclick="draw1()" id="start">Sort it</button>  --}}
+
+      </div>
+    </div>
+
+    {{!-- <div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Register</h5>
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-group">
+                          <input type="email" id="email_id" class="form-control" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                          <input type="text" id="fullname" class="form-control" placeholder="Email Address">
+                      </div>
+                      <button type="submit" class="btn btn-primary" onclick="store(event)">Subscribe</button>
+                  </form>
+              </div>
+          </div>
+      </div> --}}
+  </div>
+
+
+  </div>
+
+
+</body>
+{{!-- <script src="../indeex.js"></script> --}}
+<script>
+    var tab_position = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8)
+var correct_pos = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+var referenceObj = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]]
+
+function draw () {
+    for (i = 0; i < tab_position.length; i++) {
+      document.getElementById('p' + i).textContent = tab_position[i]
+    }
+  }
+
+  
+
+function lesgo () {
+  tab_position = new Array()
+  while (tab_position.length < 9) {
+    var numero = Math.round(Math.random() * 100)
+    if (numero == 1 || numero == 2 || numero == 3 || numero == 4 || numero == 5 || numero == 6 || numero == 7 || numero == 8 || numero == 0)
+      if (!tab_position.includes(numero)) {
+        tab_position[tab_position.length] = numero
+      }
+}
+
+  console.log(tab_position)
+  draw()
+  const d = new Date();
+  let seconds = d.getSeconds();
+    console.log(seconds);
+}
+
+function swap (cell) {
+  for (i = 0; i < referenceObj[cell].length; i++) {
+    var index = referenceObj[cell][i]
+    if (tab_position[index] === 0) {
+      var tempValue = tab_position[cell]
+      tab_position[cell] = tab_position[index]
+      tab_position[index] = tempValue
+      break
+    }
+
+    if(correct_pos === tab_position)
+    {   
+        alert("You won this")
+    }
+  }
+
+  draw()
+  return
+}
+
+
+function timer() {
+
+var sec = 0;
+    function pad ( val ) { 
+        return val > 9 ? val : "0" + val; 
+    }
+    setInterval( function(){
+        document.getElementById("seconds").innerHTML=pad(++sec%60);
+        document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
+}
+
+$(document).ready(function(){
+    $("#myModal").modal('show');
+});
+
+
+
+
+
+var taskData = [];
+var i = null;
+function store(event){
+    event.preventDefault();
+    if(taskData.length > 0){
+        var email_id = document.getElementById('email_id').value;
+        var Name = document.getElementById('fullname').value;
+        const obj = { "email": email_id , "name": Name}
+        var stored = JSON.parse(localStorage.getItem("task"));
+        stored.push(obj);
+    }
+    var email_id = document.getElementById('email_id').value;
+    var Name = document.getElementById('fullname').value;
+    const obj = { "email": email_id , "name": Name}
+    taskData.push(obj);
+    
+    localStorage.setItem("task", JSON.stringify(taskData));
+    document.getElementById("result").innerHTML = localStorage.getItem("task");
+    
+        if(i==null){
+            i= 0;
+        }
+    
+    for ( i = i; i < taskData.length; ++i) {
+    
+        var rowCount = table.rows.length;
+     var row = table.insertRow(rowCount);
+        row.insertCell(0).innerHTML= i+1;
+    row.insertCell(1).innerHTML= taskData[i].data;
+    row.insertCell(2).innerHTML= taskData[i].date;
+    i=i;
+        
+    }
+    document.getElementById('myModal').style.display = "none";
+}
+</script>
+
+</html>

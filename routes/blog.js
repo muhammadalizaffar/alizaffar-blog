@@ -23,4 +23,10 @@ router.get('/contactus', (req, res) => {
   // res.sendFile(path.join(__dirname, '../templates/contactus.html'))
 })
 
+router.get('/game', (req, res) => {
+  res.render('game');
+
+  // res.sendFile(path.join(__dirname, '../templates/contactus.html'))
+})
+
 module.exports = router
